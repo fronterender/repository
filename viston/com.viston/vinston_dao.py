@@ -22,11 +22,7 @@ class Dao():
             定义查询数据库(DDL)的方法
         """
         pass
-    def commit(self):
-        """
-            定义提交数据到数据库的方法
-        """
-        pass
+    
     def rollback(self):
         """
             定义数据库数据回滚的方法
