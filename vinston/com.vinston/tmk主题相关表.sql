@@ -9,10 +9,10 @@ CREATE TABLE `bi_tmk_info` (
   `student_id` int NULL COMMENT '学生id',
   `campus_name` varchar(50) NULL COMMENT '校区名称',
   `create_time` datetime NULL  COMMENT '订单创建时间',
+  `update_time` datetime NULL  COMMENT '订单更新时间',
   `visit_campus` varchar(50) NULL COMMENT '到访校区',
   `validity` varchar(50) NULL COMMENT '订单状态',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `index_vinston` (`emp_id`, `campus_name`, `create_time`)
+  PRIMARY KEY (`id`)
 );
 CREATE TABLE `bi_tmk_theme` (
 `id` int NOT NULL  AUTO_INCREMENT COMMENT '自增主键id',
@@ -20,12 +20,13 @@ CREATE TABLE `bi_tmk_theme` (
 `emp_name` varchar(50) NULL COMMENT '员工姓名',
 `group_name` varchar(50) NULL COMMENT '员工组别',
 `order_total` int NULL COMMENT '新单，通常是昨天新增，昨天之前为旧单，新单也可能为某个时间点的，之前的为旧',
-`campus_name` varchar(50) NULL COMMENT '校区名称',
-`invite_total` int NULL COMMENT '邀请成功总量',
+`campus_name` varchar(50) NULL COMMENT '校区名称,被邀约学生所在的校区，tmk会给多个来源的学生邀约',
+`invite_success_total` int NULL COMMENT '邀请成功总量',
 `contact_total` int NULL COMMENT 'validity字段为再联系总量',
 `order_invalid_num` int NULL COMMENT 'validity字段为无效的总量',
+`order_valid_num` int NULL COMMENT '有效订单数量',
 `order_unknown_num` int NULL COMMENT 'v_invitation表中validity中为未知的订单总数',
-`create_date` date NULL COMMENT '订单创建日期',
+`calculate_date` date NULL COMMENT '统计计算的日期，一般是每天统计一次',
  PRIMARY KEY (`id`),
  UNIQUE INDEX `index_vinston` (`emp_id`, `campus_name`, `create_date`)
 );

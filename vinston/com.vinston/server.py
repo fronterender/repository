@@ -1,12 +1,16 @@
+# -*- encoding:utf-8 -*-
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-
+from QueryData import QueryData
 
 
 class IndexHandler(tornado.web.RequestHandler):
-    def get(self):
-
+    # def get(self):
+    #     self.write("welcome to vinston english")
+    print ("\033[1;34;40m")
+    print ("程序启动")
+    def post(self):
         self.write("welcome to vinston english")
 
 if __name__ == "__main__":

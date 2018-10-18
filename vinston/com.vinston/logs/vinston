@@ -1,1 +1,2 @@
-2018-09-04 10:47:32,605   [vinston-ETL]   vinston.py	行 45	INFO:	本次程序运行结束，共6884条数据,是抽取的总体数据
+2018-09-21 14:30:16,481   [vinston-ETL]   QueryData.py	行 53	ERROR:	数据库查询失败
+2018-09-21 14:30:29,013   [vinston-ETL]   QueryData.py	行 53	ERROR:	数据库查询失败

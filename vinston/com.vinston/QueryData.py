@@ -1,10 +1,10 @@
-
+# -*- encoding:utf-8 -*-
 import pymysql
 import vinston_dao as dao
 import datetime
 import configparser
-
-
+import sys
+import writelogging
 
 
 cp = configparser.ConfigParser()
@@ -32,16 +32,25 @@ class QueryData(dao.Dao):
             self.db_basic["dbname"]\
             )
         except Exception as e:
-            print ("连接数据库失败，对方主机为%s"%self.db_basic["host"])
+            writelogging.logger.error("数据库连接失败")
     def close(self):
-        self.conn.close()
+        try:
+            self.conn.close()
+        except Exception as e:
+            writelogging.logger.error("数据库关闭失败")
+
     def query(self,sql):
-        cursor = self.conn.cursor()
-        cursor.execute(sql)
-        # 查询结果集，不包含列名称
-        resultSet = cursor.fetchall()
-        # 列名称
-        column_names = [ column_touple[0] for column_touple in cursor.description]
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql)
+            # 查询结果集，不包含列名称
+            resultSet = cursor.fetchall()
+            # 列名称
+            column_names = [ column_touple[0] for column_touple in cursor.description]
+        except Exception as e:
+            print (e)
+            writelogging.logger.error("数据库查询失败")
+            sys.exit()
         resultList = []
         for entry in resultSet:
             item = {}
@@ -62,6 +71,12 @@ class QueryData(dao.Dao):
             cursor = self.conn.cursor()
             cursor.execute(sql)
         except Exception as e:
-            pass
+            print (e)
+            writelogging.logger.error("数据更新失败，检查连接")
+            sys.exit()
     def commit(self):
-        self.conn.commit()
+        try:
+            self.conn.commit()
+        except Exception as e:
+            writelogging.logger.error("数据提交失败,检查连接")
+            sys.exit()

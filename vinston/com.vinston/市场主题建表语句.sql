@@ -49,8 +49,10 @@ create table bi_sale_info
    student_id           int,
    create_time          timestamp comment '系统录入时间',
    update_time          timestamp comment '回单状态更改时间',
+   old_to_new           varchar(50) comment '老单转新单',
    order_status         varchar(10) comment '回单有效性状态',
    state                int  comment '回单有效性状态编码',
+   description          text comment '描述信息',
    invite_success_time  timestamp comment '在v_invitation2中，状态为邀请成功的时间戳',
    PRIMARY KEY (`id`),
    UNIQUE INDEX `index_vinston` (`student_id`)
@@ -101,7 +103,9 @@ create table bi_sale_theme
    invite_total         int comment '邀约成功的总数',
    contact_total        int comment '再联系总数,邀约环节中的一个',
    create_date          date comment "订单创建日期",
-   update_time          timestamp comment '回单状态更改时间',
+   order_no_parents     int comment '非双亲陪同的数量，计算方法是检测v_student表descript字段中是否有爷爷奶奶字样'
+   valid_for_once       int comment '保存最初有效订单的数量,固定不变,尽管有效订单从有效变为无效',
+   invalid_for_once       int comment '保存最初无效订单的数量,固定不变,尽管有效订单从无效变为有效',
    PRIMARY KEY (`id`),
    UNIQUE INDEX `index_vinston` (`emp_id`, `campus_name`, `create_date`)
 );

@@ -1,8 +1,10 @@
+# -*- coding:utf-8 -*-
 import logging
 import os
 import time
 from logging.handlers import TimedRotatingFileHandler
 import sys
+
 
 
 logger = logging.getLogger("vinston-ETL")
